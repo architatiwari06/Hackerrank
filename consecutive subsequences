@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_N 100000
+#define MAX_K 100001
+
+int main() {
+    int T;
+    scanf("%d", &T);
+
+    while (T--) {
+        int n, k;
+        scanf("%d %d", &n, &k);
+
+        int arr[n];
+        for (int i = 0; i < n; i++)
+            scanf("%d", &arr[i]);
+
+        long long modCount[MAX_K];
+        memset(modCount, 0, sizeof(modCount));
+
+        modCount[0] = 1; 
+        long long prefixSum = 0;
+        long long result = 0;
+
+        for (int i = 0; i < n; i++) {
+            prefixSum += arr[i];
+            int mod = (prefixSum % k + k) % k; 
+
+            result += modCount[mod]; 
+            modCount[mod]++;
+        }
+
+        printf("%lld\n", result);
+    }
+
+    return 0;
+}
