@@ -1,0 +1,25 @@
+long largestRectangle(vector<int> h) {
+    int n = h.size();
+    vector<int> left(n), right(n);
+    
+    left[0] = -1;
+    for (int i = 1; i<n; i++) {
+        int prev = i -1;
+        while (prev >= 0 && h[prev] >= h[i])
+        prev = left[prev];
+        left[i] = prev;
+    }
+    right[n-1] = n;
+    for (int i = n-2; i>=0; i--) {
+        int next = i+1;
+        while (next < n && h[next] >= h[i])
+        next = right[next];
+        right[i] = next;
+    }
+    long maxArea = 0;
+    for (int i = 0; i<n; i++) {
+        long width = right[i] -left[i] - 1;
+        maxArea = max(maxArea, (long)h[i] * width);
+    }
+    return maxArea;
+}
