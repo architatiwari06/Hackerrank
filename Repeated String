@@ -1,0 +1,25 @@
+long repeatedString(char* s, long n) {
+    long countA = 0;
+    long len = strlen(s);
+
+    // Count 'a' in one string
+    for (long i = 0; i < len; i++) {
+        if (s[i] == 'a') {
+            countA++;
+        }
+    }
+
+    // Full repetitions
+    long fullRepeats = n / len;
+    long total = countA * fullRepeats;
+
+    // Remaining characters
+    long remainder = n % len;
+    for (long i = 0; i < remainder; i++) {
+        if (s[i] == 'a') {
+            total++;
+        }
+    }
+
+    return total;
+}
