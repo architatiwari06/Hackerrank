@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MOD = 1000000007;
+
+int substrings(string n) {
+    long long prev = 0;
+    long long ans = 0;
+
+    for (int i = 0; i < n.length(); i++) {
+        int digit = n[i] - '0';
+
+        // Sum of all substrings ending at index i
+        prev = (prev * 10 + 1LL * (i + 1) * digit) % MOD;
+
+        // Add to final answer
+        ans = (ans + prev) % MOD;
+    }
+
+    return ans;
+}
+
+int main() {
+    string n;
+    cin >> n;
+
+    cout << substrings(n) << endl;
+
+    return 0;
+}
